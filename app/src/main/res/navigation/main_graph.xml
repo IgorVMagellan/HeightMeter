@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/fragmentStart">
+
+    <fragment
+        android:id="@+id/fragmentStart"
+        android:name="com.example.heightmeter.FragmentStart"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_fragmentStart_to_fragmentHelp12"
+            app:destination="@id/fragmentHelp1" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHelp1"
+        android:name="com.example.heightmeter.FragmentHelp1"
+        android:label="fragment_help1"
+        tools:layout="@layout/fragment_help1" >
+        <action
+            android:id="@+id/action_fragmentHelp1_to_fragmentHelp2"
+            app:destination="@id/fragmentHelp2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHelp2"
+        android:name="com.example.heightmeter.FragmentHelp2"
+        android:label="fragment_help2"
+        tools:layout="@layout/fragment_help2" />
+</navigation>
