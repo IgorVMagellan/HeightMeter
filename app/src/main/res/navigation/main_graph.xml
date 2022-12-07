@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragmentStart_to_fragmentHelp12"
             app:destination="@id/fragmentHelp1" />
+        <action
+            android:id="@+id/action_fragmentStart_to_fragmentSettings"
+            app:destination="@id/fragmentSettings" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp1"
@@ -27,5 +30,18 @@
         android:id="@+id/fragmentHelp2"
         android:name="com.example.heightmeter.FragmentHelp2"
         android:label="fragment_help2"
-        tools:layout="@layout/fragment_help2" />
+        tools:layout="@layout/fragment_help2" >
+        <action
+            android:id="@+id/action_fragmentHelp2_to_fragmentStart"
+            app:destination="@id/fragmentStart" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="com.example.heightmeter.FragmentSettings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_fragmentSettings_to_fragmentStart"
+            app:destination="@id/fragmentStart" />
+    </fragment>
 </navigation>

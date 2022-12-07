@@ -5,32 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
-import com.example.heightmeter.databinding.FragmentStartBinding
+import com.example.heightmeter.databinding.FragmentSettingsBinding
 
-class FragmentStart : Fragment() {
+class FragmentSettings : Fragment() {
 
-    lateinit var binding: FragmentStartBinding
+    lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStartBinding.inflate(inflater)
+        binding = FragmentSettingsBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageButtonHelp.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_fragmentStart_to_fragmentHelp12)
+        binding.buttonSave.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_fragmentSettings_to_fragmentStart)
         }
 
-        binding.imgButtonSettings.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_fragmentStart_to_fragmentSettings)
-        }
+        //Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show()
 
     }
-
 }

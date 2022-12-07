@@ -2,6 +2,6 @@
     <string name="app_name">HeightMeter</string>
     <string name="help1_title">Help1 Fragment</string>
     <string name="help2_title">Help2 Fragment</string>
-
-
+    <string name="settings_title">Fragment настроек</string>
+    <string name="save_button">Сохранить</string>
 </resources>

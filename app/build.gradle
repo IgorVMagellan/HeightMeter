@@ -39,6 +39,12 @@ android {
     }
 }
 
+android {
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
