@@ -4,4 +4,12 @@
     <string name="help2_title">Help2 Fragment</string>
     <string name="settings_title">Fragment настроек</string>
     <string name="save_button">Сохранить</string>
+    <string name="txtHelp1">    Условия:\n
+    1. Смартфон с откалиброванным на вертикаль акселерометром\n
+    2. Строго горизонтальный взгляд попадает на само\n дерево (не ниже комля и не выше верхушки)\n
+\n
+    Подготовка:\n
+    1. Измерить длину своего обычного шага в сантиметрах\n
+    2. Запустить приложение, измеряющее углы. Например \n"Уровень" в ~Smart ToolBox~, выбрать \n"Уровень лазера"\n</string>
+    <string name="txtHelp2">"text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text"</string>
 </resources>

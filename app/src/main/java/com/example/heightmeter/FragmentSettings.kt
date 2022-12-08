@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toast.*
 import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentSettingsBinding
 
@@ -26,9 +27,11 @@ class FragmentSettings : Fragment() {
 
         binding.buttonSave.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragmentSettings_to_fragmentStart)
+
+            Toast.makeText(context, "Сохранено", LENGTH_SHORT).show()
         }
 
-       //Toast.makeText(savedInstanceState, "Сохранено", Toast.LENGTH_SHORT).show()
+
 
     }
 }

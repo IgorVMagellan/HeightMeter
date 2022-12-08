@@ -12,9 +12,7 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_fragmentStart_to_fragmentHelp12"
-            app:destination="@id/fragmentHelp1"
-
-            app:exitAnim="@android:anim/slide_in_left" />
+            app:destination="@id/fragmentHelp1" />
         <action
             android:id="@+id/action_fragmentStart_to_fragmentSettings"
             app:destination="@id/fragmentSettings" />
