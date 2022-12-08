@@ -28,7 +28,7 @@ class FragmentSettings : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_fragmentSettings_to_fragmentStart)
         }
 
-        //Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show()
+       //Toast.makeText(savedInstanceState, "Сохранено", Toast.LENGTH_SHORT).show()
 
     }
 }

@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.example.heightmeter.databinding.FragmentHelp1Binding
 import com.example.heightmeter.databinding.FragmentHelp2Binding
-import com.example.heightmeter.databinding.FragmentStartBinding
+
 
 class FragmentHelp2 : Fragment() {
 

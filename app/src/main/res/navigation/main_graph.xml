@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_fragmentStart_to_fragmentHelp12"
-            app:destination="@id/fragmentHelp1" />
+            app:destination="@id/fragmentHelp1"
+
+            app:exitAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_fragmentStart_to_fragmentSettings"
             app:destination="@id/fragmentSettings" />
@@ -24,7 +26,7 @@
         tools:layout="@layout/fragment_help1" >
         <action
             android:id="@+id/action_fragmentHelp1_to_fragmentHelp2"
-            app:destination="@id/fragmentHelp2" />
+            app:destination="@id/fragmentHelp2"/>
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp2"
@@ -33,7 +35,8 @@
         tools:layout="@layout/fragment_help2" >
         <action
             android:id="@+id/action_fragmentHelp2_to_fragmentStart"
-            app:destination="@id/fragmentStart" />
+            app:destination="@id/fragmentStart"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettings"
