@@ -19,7 +19,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentCameraXBinding
 import kotlinx.android.synthetic.main.fragment_camera_x.*
 import java.io.File
@@ -33,16 +32,11 @@ import java.util.concurrent.Executors
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentCameraX.newInstance] factory method to
- * create an instance of this fragment.
- */
-
 //typealias CornersListener = () -> Unit
 
 @Suppress("DEPRECATION")
 class FragmentCameraX : Fragment() {
+
       lateinit var binding: FragmentCameraXBinding
 
       // TODO: Rename and change types of parameters
@@ -60,15 +54,12 @@ class FragmentCameraX : Fragment() {
     private lateinit var cameraExecutor: ExecutorService
 
     //Только для скрытия системной панели
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Скрытие системной панели
-        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         super.onCreate(savedInstanceState)
-
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
+        //Скрытие системной панели
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
 
 
@@ -77,36 +68,25 @@ class FragmentCameraX : Fragment() {
         safeContext = context
     }
 
-    private fun getStatusBarHeight(): Int {
-        val resourceId =
-            safeContext.resources.getIdentifier("status_bar_height", "dimen", "android")
-        return if (resourceId > 0) {
-            safeContext.resources.getDimensionPixelSize(resourceId)
-        } else 0
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 // Hide status bar
 //      requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 // Show status bar
- //       requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+//      requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
 
-        //binding = CameraXFragmentBinding.inflate(inflater)
+        binding = FragmentCameraXBinding.inflate(inflater)
 
-        return inflater.inflate(R.layout.fragment_camera_x, container, false)
+//inflater.inflate(R.layout.fragment_camera_x, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        camera_capture_button.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_fragmentStart_to_cameraXFragment)
-        }
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -117,12 +97,10 @@ class FragmentCameraX : Fragment() {
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS
             )
-            //моё  ActivityCompat.requestPermissions(activity!!, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
         // Setup the listener for take photo button
-
-        // camera_capture_button.setOnClickListener { takePhoto() }
+        binding.cameraCaptureButton.setOnClickListener { takePhoto() }
 
         outputDirectory = getOutputDirectory()
 
@@ -153,7 +131,7 @@ class FragmentCameraX : Fragment() {
 
                 // Bind use cases to camera
 
-                camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview,  imageCapture)
+                camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
                 preview?.setSurfaceProvider(viewFinder.surfaceProvider)
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed. Cбой подключения камеры", exc)
@@ -163,21 +141,21 @@ class FragmentCameraX : Fragment() {
 
     }
 
-    fun onTouch(x: Float, y: Float) {
-        Toast.makeText(context, "onTouch", Toast.LENGTH_SHORT).show()
-
-//        // Создайте factory для создания MeteringPoint
-//        val factory = preview.createMeteringPointFactory(cameraSelector)
+//    fun onTouch(x: Float, y: Float) {
+//        Toast.makeText(context, "onTouch", Toast.LENGTH_SHORT).show()
 //
-//        // Преобразуйте UI-координаты в координаты датчиков камеры
-//        val point = factory.createPoint(x, y)
-//
-//        // Подготовьте действие фокусировки для запуска
-//        val action = FocusMeteringAction.Builder(point).build()
-//
-//        // Выполните действие фокусировки
-//        cameraControl.startFocusAndMetering(action)
-    }
+////        // Создайте factory для создания MeteringPoint
+////        val factory = preview.createMeteringPointFactory(cameraSelector)
+////
+////        // Преобразуйте UI-координаты в координаты датчиков камеры
+////        val point = factory.createPoint(x, y)
+////
+////        // Подготовьте действие фокусировки для запуска
+////        val action = FocusMeteringAction.Builder(point).build()
+////
+////        // Выполните действие фокусировки
+////        cameraControl.startFocusAndMetering(action)
+//    }
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -214,13 +192,14 @@ class FragmentCameraX : Fragment() {
     override fun onPause() {
         super.onPause()
         isOffline = true
+        // Show status bar
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
     }
 
     override fun onResume() {
         super.onResume()
         isOffline = false
-        // Show status bar
-        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+
     }
 
     override fun onDestroyView() {
@@ -287,7 +266,7 @@ class FragmentCameraX : Fragment() {
 //            }
 //    }
     companion object {
-        val TAG = "FragmentCameraX"
+        const val TAG = "FragmentCameraX"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         internal const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

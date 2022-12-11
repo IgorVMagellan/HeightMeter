@@ -38,7 +38,8 @@
         <action
             android:id="@+id/action_fragmentHelp2_to_fragmentStart"
             app:destination="@id/fragmentStart"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out"
+            app:launchSingleTop="false"  />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettings"

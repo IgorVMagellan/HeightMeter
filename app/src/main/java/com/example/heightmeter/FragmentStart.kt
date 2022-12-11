@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentStartBinding
-import android.widget.Toast
 
 
 class FragmentStart : Fragment() {
@@ -20,12 +19,10 @@ class FragmentStart : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         //Toast.makeText(context, "Сохранено", Toast.LENGTH_SHORT).show()
-
-//        clearStack()
-
         binding = FragmentStartBinding.inflate(inflater)
+        clearStack()
+
         return binding.root
     }
 
@@ -50,23 +47,21 @@ class FragmentStart : Fragment() {
     }
 
     override fun onPause() {
-        clearStack()
+//        clearStack()
         super.onPause()
     }
 
     override fun onResume() {
-        clearStack()
+//        clearStack()
         super.onResume()
     }
 
     private fun clearStack() {
 
-        val fragmentmanager: FragmentManager = AppCompatActivity().supportFragmentManager
+        val fragmentmanager: FragmentManager = requireActivity().supportFragmentManager
             //AppCompatActivity().supportFragmentManager
             //requireActivity().supportFragmentManager
             //
-
-
         var count: Int = fragmentmanager.backStackEntryCount
         Toast.makeText(context, "count $count", Toast.LENGTH_SHORT).show()
 
