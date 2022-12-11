@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".FragmentStart">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FragmentStart"
+        android:text="@string/start_frag_title"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +38,18 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
+        android:contentDescription="@string/settings_title"
         android:src="@drawable/ic_outline_settings_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCamera"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:src="@drawable/ic_outline_camera_alt_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

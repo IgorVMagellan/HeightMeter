@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">HeightMeter</string>
+    <string name="app_name">Height Meter</string>
+    <string name="start_frag_title">Fragment Start</string>
     <string name="help1_title">Help1 Fragment</string>
     <string name="help2_title">Help2 Fragment</string>
     <string name="settings_title">Fragment настроек</string>
+    <string name="butt_next_description">Следующая страница</string>
     <string name="save_button">Сохранить</string>
     <string name="txtHelp1">    Условия:\n
     1. Смартфон с откалиброванным на вертикаль акселерометром\n
@@ -11,5 +13,7 @@
     Подготовка:\n
     1. Измерить длину своего обычного шага в сантиметрах\n
     2. Запустить приложение, измеряющее углы. Например \n"Уровень" в ~Smart ToolBox~, выбрать \n"Уровень лазера"\n</string>
-    <string name="txtHelp2">"text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text"</string>
+    <string name="txtHelp2">"много букв text text text text text text text text много букв text text text text text text text text text text text text text text text text text text text text text text"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

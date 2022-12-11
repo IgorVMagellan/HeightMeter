@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_fragmentStart_to_fragmentSettings"
             app:destination="@id/fragmentSettings" />
+        <action
+            android:id="@+id/action_fragmentStart_to_cameraXFragment"
+            app:destination="@id/cameraXFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp1"
@@ -24,7 +27,8 @@
         tools:layout="@layout/fragment_help1" >
         <action
             android:id="@+id/action_fragmentHelp1_to_fragmentHelp2"
-            app:destination="@id/fragmentHelp2"/>
+            app:destination="@id/fragmentHelp2"
+            app:launchSingleTop="false" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp2"
@@ -45,4 +49,9 @@
             android:id="@+id/action_fragmentSettings_to_fragmentStart"
             app:destination="@id/fragmentStart" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraXFragment"
+        android:name="com.example.heightmeter.FragmentCameraX"
+        android:label="fragment_camera_x"
+        tools:layout="@layout/fragment_camera_x" />
 </navigation>
