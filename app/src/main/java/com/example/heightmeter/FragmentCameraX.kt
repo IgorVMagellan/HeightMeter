@@ -1,12 +1,21 @@
+@file:Suppress("OVERRIDE_DEPRECATION")
+
 package com.example.heightmeter
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.RectF
+import android.media.MediaActionSound
 import android.net.Uri
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -23,10 +32,12 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+
 //import android.graphics.drawable.GradientDrawable
 //import kotlin.math.abs
 
 @Suppress("DEPRECATION")
+
 class FragmentCameraX : Fragment() {
 
     lateinit var binding: FragmentCameraXBinding
@@ -41,6 +52,8 @@ class FragmentCameraX : Fragment() {
     private lateinit var safeContext: Context
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+
+    var rectSize = 100 // размер прямоугольника автофокуса
 
     //Только для скрытия системной панели
 
@@ -96,6 +109,7 @@ class FragmentCameraX : Fragment() {
 //        cameraExecutor = Executors.newCachedThreadPool()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun startCamera() {
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(safeContext)
@@ -108,14 +122,13 @@ class FragmentCameraX : Fragment() {
             preview = Preview.Builder().build()
 
 //  сюда добавляются допы
-            //val factory = preview.getMeteringPointFactory();
 
             imageCapture = ImageCapture.Builder().build()
 
             // Выбор задней камеры
-            val cameraSelector =
-                CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
-
+//            val cameraSelector =
+//                CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             try {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
@@ -125,30 +138,53 @@ class FragmentCameraX : Fragment() {
                 camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
                 preview?.setSurfaceProvider(viewFinder.surfaceProvider)
 
+                cameraControl = camera?.cameraControl
+                cameraInfo = camera?.cameraInfo
+
+                ////////
+                //touch listener (тапа по экрану)
+                viewFinder.setOnTouchListener { _, event ->
+                    if (event.action != MotionEvent.ACTION_UP) {
+                        return@setOnTouchListener true
+                    }
+
+                    val factory = viewFinder.getMeteringPointFactory()
+                    val point = factory.createPoint(event.x, event.y)
+                    val action = FocusMeteringAction.Builder(point).build()
+
+                    cameraControl?.startFocusAndMetering(action)
+                    Toast.makeText(safeContext, "onTouch", Toast.LENGTH_SHORT).show()
+//
+                    val focusRects = listOf(
+                        RectF(
+                            event.x - rectSize,
+                            event.y - rectSize,
+                            event.x + rectSize,
+                            event.y + rectSize
+                        )
+                    )  // rect_overlay
+                    rect_overlay.post { rect_overlay.drawRectBounds(focusRects) }
+//                    overlay_rect_af.post { overlay_rect_af.drawRectBounds(focusRects) }
+// OverlayRectAF
+
+
+                    Log.e(TAG, "Focus Coordinates: " + event.x + " , " + event.y)
+                    Log.e(
+                        TAG,
+                        "preview view dimensions: " + viewFinder.width + " x " + viewFinder.height
+                    )
+//
+                    return@setOnTouchListener true
+                }
+
+                ////////
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed. Cбой подключения камеры", exc)
             }
-            cameraControl = camera?.cameraControl
-            cameraInfo = camera?.cameraInfo
+//            cameraControl = camera?.cameraControl
+//            cameraInfo = camera?.cameraInfo
 
         }, ContextCompat.getMainExecutor(safeContext))
-
-        //    fun onTouch(x: Float, y: Float) {
-        fun onTouch() {
-            Toast.makeText(safeContext, "onTouch", Toast.LENGTH_SHORT).show()
-//
-//            // Создайте factory для создания MeteringPoint
-//            val factory = preview.getMeteringPointFactory();
-//
-//            // Преобразуйте UI-координаты в координаты датчиков камеры
-//            val point = factory.createPoint(x, y)
-//
-//            // Подготовьте действие фокусировки для запуска
-//            val action = FocusMeteringAction.Builder(point).build()
-//
-//            // Выполните действие фокусировки
-//            cameraControl.startFocusAndMetering(action)
-        }
 
     }
 
@@ -183,6 +219,9 @@ class FragmentCameraX : Fragment() {
                     Log.d(TAG, msg)
                 }
             })
+        val sound = MediaActionSound()
+        sound.play(MediaActionSound.SHUTTER_CLICK)
+
     }
 
     override fun onPause() {
@@ -204,7 +243,6 @@ class FragmentCameraX : Fragment() {
 
         // Shut down our background executor
         cameraExecutor.shutdown()
-
 
         // Unregister the broadcast receivers and listeners
         // broadcastManager.unregisterReceiver(volumeDownReceiver)
@@ -250,4 +288,27 @@ class FragmentCameraX : Fragment() {
         var isOffline = false // prevent app crash when goes offline
     }
 
+}  // RectOverlay
+
+class RectOverlay constructor(context: Context?, attributeSet: AttributeSet?) :
+    View(context, attributeSet) {
+
+    private val rectBounds: MutableList<RectF> = mutableListOf()
+    private val paint = Paint().apply {
+        style = Paint.Style.STROKE
+        color = ContextCompat.getColor(context!!, android.R.color.holo_green_light)
+        strokeWidth = 5f
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        // Pass it a list of RectF (rectBounds)
+        rectBounds.forEach { canvas.drawRect(it, paint) }
+    }
+
+    fun drawRectBounds(rectBounds: List<RectF>) {
+        this.rectBounds.clear()
+        this.rectBounds.addAll(rectBounds)
+        invalidate()
+    }
 }

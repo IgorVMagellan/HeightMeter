@@ -13,6 +13,11 @@
         android:layout_height="match_parent">
     </androidx.camera.view.PreviewView>
 
+    <com.example.heightmeter.RectOverlay
+        android:id="@+id/rect_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.example.heightmeter.RectOverlay>
 
     <Button
         android:id="@+id/camera_capture_button"
