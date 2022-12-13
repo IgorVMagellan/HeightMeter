@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_clin">#FF4a4a4a</color>
+    <color name="settings_yellow">#FFF8D914</color>
+    <color name="settings_gray">#FF303030</color>
+    <color name="settings_text_color">#FFFFFFFF</color>
+    <color name="settings_hint_color">#FF808080</color>
+    <color name="settings_text_color_highlight">#B59D09</color>
+    <color name="settings_text_color_colorlink">#FFF8D914</color>
 </resources>

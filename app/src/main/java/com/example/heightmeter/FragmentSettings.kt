@@ -9,8 +9,8 @@ import android.widget.Toast
 import android.widget.Toast.*
 import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentSettingsBinding
-///
-//import android.content.Context
+
+import android.content.Context
 //import android.content.SharedPreferences
 
 class FragmentSettings : Fragment() {
@@ -34,9 +34,6 @@ class FragmentSettings : Fragment() {
 
             val fgggh = binding.editTextNumberDecimal.text.toString()
 
-          //personHeight = fgggh.toInt()
-
-            //val passText = binding.editTextPassword.text.toString()
 
 //            with (prefs.edit()) {
 //                putInt(getString(R.id.editTextNumberDecimal.text), personHeight)

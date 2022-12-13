@@ -1,9 +1,5 @@
 package com.example.heightmeter
 
-//import android.graphics.drawable.GradientDrawable
-
-//import kotlin.math.abs
-
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -27,29 +23,22 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-//// TODO: Rename parameter arguments, choose names that match
-//// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
-
-//typealias CornersListener = () -> Unit
+//import android.graphics.drawable.GradientDrawable
+//import kotlin.math.abs
 
 @Suppress("DEPRECATION")
 class FragmentCameraX : Fragment() {
 
-      lateinit var binding: FragmentCameraXBinding
-
-      // TODO: Rename and change types of parameters
-//    private var param1: String? = null
-//    private var param2: String? = null
+    lateinit var binding: FragmentCameraXBinding
 
     private var preview: Preview? = null
     private var imageCapture: ImageCapture? = null
-//    private var surfaceprovider: surfaceProvider? = null
     private var camera: Camera? = null
 
-    private lateinit var safeContext: Context
+    private var cameraControl: CameraControl? = null   // нужны ли?
+    private var cameraInfo: CameraInfo? = null
 
+    private lateinit var safeContext: Context
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
 
@@ -61,7 +50,6 @@ class FragmentCameraX : Fragment() {
         //Скрытие системной панели
         requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -81,7 +69,7 @@ class FragmentCameraX : Fragment() {
 
         binding = FragmentCameraXBinding.inflate(inflater)
 
-//inflater.inflate(R.layout.fragment_camera_x, container, false)
+//return inflater.inflate(R.layout.fragment_camera_x, container, false)
         return binding.root
     }
 
@@ -109,7 +97,7 @@ class FragmentCameraX : Fragment() {
     }
 
     private fun startCamera() {
-        //OpenCVLoader.initDebug()
+
         val cameraProviderFuture = ProcessCameraProvider.getInstance(safeContext)
 
         cameraProviderFuture.addListener(Runnable {
@@ -119,9 +107,12 @@ class FragmentCameraX : Fragment() {
             // Preview
             preview = Preview.Builder().build()
 
+//  сюда добавляются допы
+            //val factory = preview.getMeteringPointFactory();
+
             imageCapture = ImageCapture.Builder().build()
 
-            // Select back camera
+            // Выбор задней камеры
             val cameraSelector =
                 CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
@@ -133,29 +124,34 @@ class FragmentCameraX : Fragment() {
 
                 camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
                 preview?.setSurfaceProvider(viewFinder.surfaceProvider)
+
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed. Cбой подключения камеры", exc)
             }
+            cameraControl = camera?.cameraControl
+            cameraInfo = camera?.cameraInfo
 
         }, ContextCompat.getMainExecutor(safeContext))
 
+        //    fun onTouch(x: Float, y: Float) {
+        fun onTouch() {
+            Toast.makeText(safeContext, "onTouch", Toast.LENGTH_SHORT).show()
+//
+//            // Создайте factory для создания MeteringPoint
+//            val factory = preview.getMeteringPointFactory();
+//
+//            // Преобразуйте UI-координаты в координаты датчиков камеры
+//            val point = factory.createPoint(x, y)
+//
+//            // Подготовьте действие фокусировки для запуска
+//            val action = FocusMeteringAction.Builder(point).build()
+//
+//            // Выполните действие фокусировки
+//            cameraControl.startFocusAndMetering(action)
+        }
+
     }
 
-//    fun onTouch(x: Float, y: Float) {
-//        Toast.makeText(context, "onTouch", Toast.LENGTH_SHORT).show()
-//
-////        // Создайте factory для создания MeteringPoint
-////        val factory = preview.createMeteringPointFactory(cameraSelector)
-////
-////        // Преобразуйте UI-координаты в координаты датчиков камеры
-////        val point = factory.createPoint(x, y)
-////
-////        // Подготовьте действие фокусировки для запуска
-////        val action = FocusMeteringAction.Builder(point).build()
-////
-////        // Выполните действие фокусировки
-////        cameraControl.startFocusAndMetering(action)
-//    }
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -209,9 +205,10 @@ class FragmentCameraX : Fragment() {
         // Shut down our background executor
         cameraExecutor.shutdown()
 
+
         // Unregister the broadcast receivers and listeners
-       // broadcastManager.unregisterReceiver(volumeDownReceiver)
-       // displayManager.unregisterDisplayListener(displayListener)
+        // broadcastManager.unregisterReceiver(volumeDownReceiver)
+        // displayManager.unregisterDisplayListener(displayListener)
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -245,26 +242,6 @@ class FragmentCameraX : Fragment() {
         return if (mediaDir != null && mediaDir.exists()) mediaDir else activity?.filesDir!!
     }
 
-
-    //    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment FragmentCameraX.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            FragmentCameraX().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
     companion object {
         const val TAG = "FragmentCameraX"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
@@ -273,22 +250,4 @@ class FragmentCameraX : Fragment() {
         var isOffline = false // prevent app crash when goes offline
     }
 
-//    private class CornerAnalyzer(private val listener: CornersListener) : ImageAnalysis.Analyzer {
-//
-//        private fun ByteBuffer.toByteArray(): ByteArray {
-//            rewind()    // Rewind the buffer to zero
-//            val data = ByteArray(remaining())
-//            get(data)   // Copy the buffer into a byte array
-//            return data // Return the byte array
-//        }
-//
-//        @SuppressLint("UnsafeExperimentalUsageError")
-//        override fun analyze(imageProxy: ImageProxy) {
-//            if (!isOffline) {
-//                listener()
-//            }
-//            imageProxy.close() // important! if it is not closed it will only run once
-//        }
-//
-//    }
 }

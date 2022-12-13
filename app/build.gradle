@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 
     id 'kotlin-android'
     id 'kotlin-android-extensions'
@@ -48,13 +49,6 @@ android {
     }
 }
 
-/*def camerax_version = "1.0.0-beta06"
-// Базовая библиотека CameraX с использованием реализации реализации camera2
-" androidx.camera:camera-camera2: $camerax_version "
-// Реализация библиотеки жизненного цикла CameraX
-"androidx.camera:camera-lifecycle: $camerax_version "
-// Реализация класса CameraX View "androidx.camera:camera-view:1.0.0-alpha13"*/
-
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
@@ -70,15 +64,6 @@ dependencies {
 
 //  Camera
 
-/*    def camerax_version = "1.1.0-beta06"
-    implementation "androidx.camera:camera-core:${camerax_version}"
-    implementation "androidx.camera:camera-camera2:${camerax_version}"
-    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
-    implementation "androidx.camera:camera-video:${camerax_version}"
-
-    implementation "androidx.camera:camera-view:${camerax_version}"
-    implementation "androidx.camera:camera-extensions:${camerax_version}"*/
-
  //   def camerax_version = '1.1.0-beta01'
     def camerax_version = '1.2.0'
     implementation "androidx.camera:camera-core:$camerax_version"
@@ -93,14 +78,4 @@ dependencies {
     implementation "androidx.camera:camera-view:$camerax_version"
 
     implementation "androidx.camera:camera-extensions:$camerax_version"
-
-//    implementation "project(':opencv')"
-
-/*    def camerax_version = "1.0.0-beta06"
-// CameraX core library using camera2 implementation
-    implementation "androidx.camera:camera-camera2:$camerax_version"
-// CameraX Lifecycle Library
-    implementation "androidx.camera:camera-lifecycle:$camerax_version"
-// CameraX View class
-    implementation "androidx.camera:camera-view:1.0.0-alpha13"*/
 }
