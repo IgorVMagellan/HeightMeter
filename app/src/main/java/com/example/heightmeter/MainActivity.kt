@@ -1,11 +1,9 @@
 package com.example.heightmeter
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-
 import android.content.Context
 import android.content.SharedPreferences
-import android.widget.Toast
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,25 +45,17 @@ class MainActivity : AppCompatActivity() {
         if (prefs.contains(APP_PREFERENCES_ISSOUND)) {
             // Получаем из настроек
             isSound = prefs.getBoolean(APP_PREFERENCES_ISSOUND, true)
-            Toast.makeText(
-                applicationContext,
-                "Я прочитал isSound= ${isSound.toString()} .",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                applicationContext,
+//                "Я прочитал isSound= ${isSound.toString()} .",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }
         super.onResume()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstanceMain() = MainActivity().apply {
 //                arguments = Bundle().apply {

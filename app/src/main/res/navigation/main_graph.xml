@@ -27,8 +27,12 @@
         tools:layout="@layout/fragment_help1" >
         <action
             android:id="@+id/action_fragmentHelp1_to_fragmentHelp2"
-            app:destination="@id/fragmentHelp2"
-            app:launchSingleTop="false" />
+            app:destination="@id/fragmentHelp2"/>
+        <action
+            android:id="@+id/action_fragmentHelp1_to_fragmentStart3"
+            app:destination="@id/fragmentStart"
+            app:popUpTo="@id/fragmentStart"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp2"
@@ -39,7 +43,8 @@
             android:id="@+id/action_fragmentHelp2_to_fragmentStart"
             app:destination="@id/fragmentStart"
             app:exitAnim="@android:anim/fade_out"
-            app:launchSingleTop="false"  />
+            app:popUpTo="@id/fragmentStart"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettings"
@@ -48,7 +53,9 @@
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_fragmentSettings_to_fragmentStart"
-            app:destination="@id/fragmentStart" />
+            app:destination="@id/fragmentStart"
+            app:popUpTo="@id/fragmentStart"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/cameraXFragment"

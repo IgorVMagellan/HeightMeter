@@ -1,16 +1,14 @@
 package com.example.heightmeter
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.*
+import android.widget.Toast.LENGTH_SHORT
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentSettingsBinding
-
-import android.content.Context
 //import android.content.SharedPreferences
 
 class FragmentSettings : Fragment() {
@@ -32,15 +30,14 @@ class FragmentSettings : Fragment() {
         binding.buttonSave.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragmentSettings_to_fragmentStart)
 
-            val fgggh = binding.editTextNumberDecimal.text.toString()
-
+            val etnd = binding.editTextNumberDecimal.text.toString()
 
 //            with (prefs.edit()) {
 //                putInt(getString(R.id.editTextNumberDecimal.text), personHeight)
 //                apply()
 //            }
 
-            Toast.makeText(context, "Сохранено $fgggh", LENGTH_SHORT).show()
+            Toast.makeText(context, "Сохранено $etnd (нет :)", LENGTH_SHORT).show()
         }
 
 

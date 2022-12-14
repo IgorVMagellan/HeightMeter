@@ -6,7 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/settings_gray"
-    tools:context=".FragmentSettings">
+    tools:context=".FragmentSettings"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="-33dp">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:text="@string/settings_your_height"
+        android:textColor="@color/settings_text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
+        app:layout_constraintVertical_bias="0.535" />
 
     <TextView
         android:id="@+id/textView4"
@@ -14,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_title"
         android:textAlignment="center"
-        android:textColor="@color/settings_text_color"
+        android:textColor="@color/settings_yellow"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,10 +70,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
-        app:layout_constraintVertical_bias="0.535" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextNumberDecimal"
@@ -65,6 +82,7 @@
         android:width="50dp"
         android:ems="10"
         android:hint="@string/settings_your_height_hint"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:textColor="@color/settings_text_color"
         android:textColorHighlight="@color/settings_text_color_highlight"
@@ -72,17 +90,18 @@
         android:textColorLink="@color/settings_text_color_colorlink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.781"
+        app:layout_constraintHorizontal_bias="0.778"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.124" />
 
     <Switch
         android:id="@+id/switchSound"
         android:layout_width="164dp"
         android:layout_height="49dp"
         android:checked="true"
+        android:contentDescription="@string/settings_is_sound"
+        android:elegantTextHeight="true"
         android:gravity="center_vertical"
         android:text="@string/settings_is_sound"
         android:textColor="@color/settings_text_color"
@@ -91,9 +110,10 @@
         android:textColorLink="@color/settings_text_color_colorlink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312"
+        app:layout_constraintVertical_bias="0.236"
         tools:checked="false" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -105,13 +125,15 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="107dp"
+        android:layout_width="369dp"
+        android:layout_height="98dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="64dp"
         android:layout_marginRight="20dp"
         android:layoutDirection="rtl"
         android:layoutMode="clipBounds"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchSound">
@@ -125,7 +147,9 @@
             android:textColor="@color/settings_text_color"
             android:textColorHighlight="@color/settings_text_color_highlight"
             android:textColorHint="@color/settings_hint_color"
-            android:textColorLink="@color/settings_text_color_colorlink" />
+            android:textColorLink="@color/settings_text_color_colorlink"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="289dp" />
 
         <RadioButton
             android:id="@+id/radioButton2"
@@ -136,14 +160,16 @@
             android:textColor="@color/settings_text_color"
             android:textColorHighlight="@color/settings_text_color_highlight"
             android:textColorHint="@color/settings_hint_color"
-            android:textColorLink="@color/settings_text_color_colorlink" />
+            android:textColorLink="@color/settings_text_color_colorlink"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="337dp" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textViewTapTitle"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
         android:text="@string/settings_tap_title"
         android:textColor="@color/settings_text_color"
@@ -153,23 +179,59 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/barHor"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="12dp"
-        android:background="#Ffffff"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/separator_yellow"
         android:hapticFeedbackEnabled="false"
         android:visibility="visible"
         app:guidelineUseRtl="false"
         app:layout_constraintBottom_toTopOf="@+id/textViewTapTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <View
+        android:id="@+id/barHor2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/separator_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <ImageButton
+        android:id="@+id/imgButtCalibration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/settings_calibration"
+        android:src="@drawable/ic_baseline_center_focus_strong_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barHor2" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="175dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="@string/settings_calibration"
+        android:textColor="@color/settings_text_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/barHor2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

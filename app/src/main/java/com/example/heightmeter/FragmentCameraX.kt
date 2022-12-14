@@ -6,13 +6,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.RectF
 import android.media.MediaActionSound
 import android.net.Uri
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -31,8 +28,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-
-
 //import android.graphics.drawable.GradientDrawable
 //import kotlin.math.abs
 
@@ -46,7 +41,7 @@ class FragmentCameraX : Fragment() {
     private var imageCapture: ImageCapture? = null
     private var camera: Camera? = null
 
-    private var cameraControl: CameraControl? = null   // нужны ли?
+    private var cameraControl: CameraControl? = null   // нужна ли?
     private var cameraInfo: CameraInfo? = null
 
     private lateinit var safeContext: Context
@@ -130,7 +125,7 @@ class FragmentCameraX : Fragment() {
 //                CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             try {
-                // Unbind use cases before rebinding
+                // Отвязка всех привязок камеры
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
@@ -141,8 +136,9 @@ class FragmentCameraX : Fragment() {
                 cameraControl = camera?.cameraControl
                 cameraInfo = camera?.cameraInfo
 
+
                 ////////
-                //touch listener (тапа по экрану)
+                //listener тапа по экрану
                 viewFinder.setOnTouchListener { _, event ->
                     if (event.action != MotionEvent.ACTION_UP) {
                         return@setOnTouchListener true
@@ -162,22 +158,20 @@ class FragmentCameraX : Fragment() {
                             event.x + rectSize,
                             event.y + rectSize
                         )
-                    )  // rect_overlay
-                    rect_overlay.post { rect_overlay.drawRectBounds(focusRects) }
-//                    overlay_rect_af.post { overlay_rect_af.drawRectBounds(focusRects) }
-// OverlayRectAF
-
-
-                    Log.e(TAG, "Focus Coordinates: " + event.x + " , " + event.y)
-                    Log.e(
-                        TAG,
-                        "preview view dimensions: " + viewFinder.width + " x " + viewFinder.height
                     )
-//
+
+ //                   overlay_info.post { overlay_info.drawRectBounds(focusRects) }
+
+//                    rect_overlay.post { rect_overlay.drawRectBounds(focusRects) }
+
+                    overlay_rect_af.post { overlay_rect_af.drawRectBounds(focusRects) }
+// OverlayRectAF
+                    Log.e(TAG, "Focus Coordinates: " + event.x + " , " + event.y)
+                    Log.e(TAG, "preview view dimensions: " + viewFinder.width + " x " + viewFinder.height)
+
                     return@setOnTouchListener true
                 }
-
-                ////////
+                //////// Конец listener тапа по экрану
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed. Cбой подключения камеры", exc)
             }
@@ -280,6 +274,14 @@ class FragmentCameraX : Fragment() {
         return if (mediaDir != null && mediaDir.exists()) mediaDir else activity?.filesDir!!
     }
 
+    private fun getStatusBarHeight(): Int {
+        val resourceId =
+            safeContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            safeContext.resources.getDimensionPixelSize(resourceId)
+        } else 0
+    }
+
     companion object {
         const val TAG = "FragmentCameraX"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
@@ -288,27 +290,6 @@ class FragmentCameraX : Fragment() {
         var isOffline = false // prevent app crash when goes offline
     }
 
-}  // RectOverlay
-
-class RectOverlay constructor(context: Context?, attributeSet: AttributeSet?) :
-    View(context, attributeSet) {
-
-    private val rectBounds: MutableList<RectF> = mutableListOf()
-    private val paint = Paint().apply {
-        style = Paint.Style.STROKE
-        color = ContextCompat.getColor(context!!, android.R.color.holo_green_light)
-        strokeWidth = 5f
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        // Pass it a list of RectF (rectBounds)
-        rectBounds.forEach { canvas.drawRect(it, paint) }
-    }
-
-    fun drawRectBounds(rectBounds: List<RectF>) {
-        this.rectBounds.clear()
-        this.rectBounds.addAll(rectBounds)
-        invalidate()
-    }
 }
+
+

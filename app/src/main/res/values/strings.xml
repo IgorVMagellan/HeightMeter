@@ -22,5 +22,6 @@
     <string name="settings_tap_title">Тап по экрану:</string>
     <string name="settings_tap_autofocus">Автофокусировка на указанной области</string>
     <string name="settings_tap_fix_measure">Зафиксировать измеренный угол</string>
+    <string name="settings_calibration">Калибровка</string>
 
 </resources>

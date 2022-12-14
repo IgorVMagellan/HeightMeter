@@ -29,13 +29,12 @@ class FragmentHelp1 : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_fragmentHelp1_to_fragmentHelp2)
         }
 
-        binding.imgButtBack.setOnClickListener {dialogAbout()}
+        binding.imgButtBack.setOnClickListener {
+            //dialogAbout()
+            Navigation.findNavController(it).navigate(R.id.action_fragmentHelp1_to_fragmentStart3)
+        }
 
     }
-
-
-
-
 
         fun dialogAbout() {
             val sound = MediaActionSound()

@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.heightmeter.databinding.FragmentStartBinding
 
@@ -21,7 +19,7 @@ class FragmentStart : Fragment() {
     ): View {
         //Toast.makeText(context, "Сохранено", Toast.LENGTH_SHORT).show()
         binding = FragmentStartBinding.inflate(inflater)
-        clearStack()
+//        clearStack()
 
         return binding.root
     }
@@ -56,25 +54,26 @@ class FragmentStart : Fragment() {
         super.onResume()
     }
 
-    private fun clearStack() {
-
-        val fragmentmanager: FragmentManager = requireActivity().supportFragmentManager
-            //AppCompatActivity().supportFragmentManager
-            //requireActivity().supportFragmentManager
-            //
-        var count: Int = fragmentmanager.backStackEntryCount
-        Toast.makeText(context, "count $count", Toast.LENGTH_SHORT).show()
-
-        while (count > 0) {
-            fragmentmanager.popBackStack()
-            count--
-        }
+//    private fun clearStack() {
+//
+//        val fragmentmanager: FragmentManager = requireActivity().getSupportFragmentManager()
+//        //supportFragmentManager
+//            //AppCompatActivity().supportFragmentManager
+//            //requireActivity().supportFragmentManager
+//            //
+//        var count: Int = fragmentmanager.backStackEntryCount
+//        Toast.makeText(context, "count $count", Toast.LENGTH_SHORT).show()
+//
+//        while (count > 0) {
+//            fragmentmanager.popBackStack()
+//            count--
+//        }
 
 //        val fm = requireActivity().supportFragmentManager
 //        for (i in 0 until fm.backStackEntryCount) {
 //            fm.popBackStack()
 //        }
 
-    }
+//    }
 
 }

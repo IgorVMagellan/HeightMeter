@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
@@ -13,11 +14,36 @@
         android:layout_height="match_parent">
     </androidx.camera.view.PreviewView>
 
-    <com.example.heightmeter.RectOverlay
-        android:id="@+id/rect_overlay"
+    <com.example.heightmeter.OverlayInfo
+        android:id="@+id/overlay_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.heightmeter.RectOverlay>
+    </com.example.heightmeter.OverlayInfo>
+
+    <View
+        android:id="@+id/barHor"
+        android:layout_width="110dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#FFFFFF"
+        android:hapticFeedbackEnabled="false"
+        android:visibility="visible" />
+
+    <View
+        android:id="@+id/barVert"
+        android:layout_width="1dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#ffffff"
+        android:hapticFeedbackEnabled="false"
+        android:visibility="visible" />
+
+    <com.example.heightmeter.OverlayRectAF
+        android:id="@+id/overlay_rect_af"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.example.heightmeter.OverlayRectAF>
+
 
     <Button
         android:id="@+id/camera_capture_button"
