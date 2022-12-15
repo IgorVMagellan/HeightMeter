@@ -28,8 +28,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-//import android.graphics.drawable.GradientDrawable
-//import kotlin.math.abs
 
 @Suppress("DEPRECATION")
 

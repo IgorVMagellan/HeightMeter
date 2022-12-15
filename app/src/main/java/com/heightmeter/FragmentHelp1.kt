@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.heightmeter.databinding.FragmentHelp1Binding
 
-
 class FragmentHelp1 : Fragment() {
     lateinit var binding: FragmentHelp1Binding
 
