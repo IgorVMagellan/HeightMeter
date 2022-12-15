@@ -12,7 +12,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.heightmeter"
+        applicationId 'magellan.heightmeter'
         minSdk 23
         targetSdk 33
         versionCode 1
