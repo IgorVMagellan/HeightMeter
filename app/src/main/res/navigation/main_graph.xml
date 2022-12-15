@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentStart"
-        android:name="com.example.heightmeter.FragmentStart"
+        android:name="com.heightmeter.FragmentStart"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp1"
-        android:name="com.example.heightmeter.FragmentHelp1"
+        android:name="com.heightmeter.FragmentHelp1"
         android:label="fragment_help1"
         tools:layout="@layout/fragment_help1" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentHelp2"
-        android:name="com.example.heightmeter.FragmentHelp2"
+        android:name="com.heightmeter.FragmentHelp2"
         android:label="fragment_help2"
         tools:layout="@layout/fragment_help2" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSettings"
-        android:name="com.example.heightmeter.FragmentSettings"
+        android:name="com.heightmeter.FragmentSettings"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/cameraXFragment"
-        android:name="com.example.heightmeter.FragmentCameraX"
+        android:name="com.heightmeter.FragmentCameraX"
         android:label="fragment_camera_x"
         tools:layout="@layout/fragment_camera_x" />
 </navigation>

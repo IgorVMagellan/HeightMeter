@@ -1,4 +1,4 @@
-package com.example.heightmeter
+package com.heightmeter
 
 import android.content.Context
 import android.content.SharedPreferences

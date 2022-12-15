@@ -1,4 +1,4 @@
-package com.example.heightmeter
+package com.heightmeter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.heightmeter.databinding.FragmentHelp2Binding
+import com.heightmeter.databinding.FragmentHelp2Binding
 
 
 class FragmentHelp2 : Fragment() {

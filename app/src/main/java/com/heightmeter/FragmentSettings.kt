@@ -1,4 +1,4 @@
-package com.example.heightmeter
+package com.heightmeter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.heightmeter.databinding.FragmentSettingsBinding
+import com.heightmeter.databinding.FragmentSettingsBinding
 //import android.content.SharedPreferences
 
 class FragmentSettings : Fragment() {

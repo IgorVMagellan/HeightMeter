@@ -14,11 +14,11 @@
         android:layout_height="match_parent">
     </androidx.camera.view.PreviewView>
 
-    <com.example.heightmeter.OverlayInfo
+    <com.heightmeter.OverlayInfo
         android:id="@+id/overlay_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.heightmeter.OverlayInfo>
+    </com.heightmeter.OverlayInfo>
 
     <View
         android:id="@+id/barHor"
@@ -38,11 +38,11 @@
         android:hapticFeedbackEnabled="false"
         android:visibility="visible" />
 
-    <com.example.heightmeter.OverlayRectAF
+    <com.heightmeter.OverlayRectAF
         android:id="@+id/overlay_rect_af"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.heightmeter.OverlayRectAF>
+    </com.heightmeter.OverlayRectAF>
 
 
     <Button

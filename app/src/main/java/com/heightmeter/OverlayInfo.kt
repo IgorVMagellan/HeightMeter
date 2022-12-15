@@ -1,4 +1,4 @@
-package com.example.heightmeter
+package com.heightmeter
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,14 +8,14 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
 
-class OverlayRectAF constructor(context: Context?, attributeSet: AttributeSet?) :
+class OverlayInfo constructor(context: Context?, attributeSet: AttributeSet?) :
     View(context, attributeSet) {
 
     private val rectBounds: MutableList<RectF> = mutableListOf()
     private val paint = Paint().apply {
         style = Paint.Style.STROKE
         color = ContextCompat.getColor(context!!, android.R.color.holo_green_light)
-        strokeWidth = 3f
+        strokeWidth = 5f
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -29,4 +29,18 @@ class OverlayRectAF constructor(context: Context?, attributeSet: AttributeSet?) 
         this.rectBounds.addAll(rectBounds)
         invalidate()
     }
+
+    private fun getStatusBarHeight(): Int {
+        val resourceId =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            context.resources.getDimensionPixelSize(resourceId)
+        } else 0
+    }
+
 }
+
+
+
+
+

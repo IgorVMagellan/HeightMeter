@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.heightmeter'
+    namespace 'com.heightmeter'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.heightmeter"
+        applicationId 'com.heightmeter'
         minSdk 23
         targetSdk 33
         versionCode 1
