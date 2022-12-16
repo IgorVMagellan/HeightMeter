@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.heightmeter.databinding.FragmentStartBinding
@@ -19,16 +20,15 @@ class FragmentStart : Fragment() {
     ): View {
         //Toast.makeText(context, "Сохранено", Toast.LENGTH_SHORT).show()
         binding = FragmentStartBinding.inflate(inflater)
-//        clearStack()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-//        clearStack()
-
         super.onViewCreated(view, savedInstanceState)
+
+        setupBackButton()  // показ кнопки Назад слева вверху
 
         binding.imageButtonHelp.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragmentStart_to_fragmentHelp12)
@@ -44,14 +44,11 @@ class FragmentStart : Fragment() {
 
     }
 
-    override fun onPause() {
-//        clearStack()
-        super.onPause()
-    }
-
-    override fun onResume() {
-//        clearStack()
-        super.onResume()
+    // Кнопка Назад в APPBAR
+    private fun setupBackButton() {
+        if (activity is AppCompatActivity) {
+            (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
 //    private fun clearStack() {

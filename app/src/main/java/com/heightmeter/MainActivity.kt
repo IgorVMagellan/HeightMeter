@@ -3,7 +3,9 @@ package com.heightmeter
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,16 +56,27 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstanceMain() = MainActivity().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
+    // Обеспечивает переход назад по кнопке на APPBAR
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+//                Toast.makeText(this, "Back pressed", Toast.LENGTH_SHORT).show()
+                    super.onBackPressed()
+                return true
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
+//    companion object {
+//
+//        @JvmStatic
+//        fun newInstanceMain() = MainActivity().apply {
+////                arguments = Bundle().apply {
+////                    putString(ARG_PARAM1, param1)
+////                    putString(ARG_PARAM2, param2)
+////                }
+//        }
+//    }
 
 }
 

@@ -16,6 +16,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity  // для скрытия APPBAR
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
@@ -49,7 +50,6 @@ class FragmentCameraX : Fragment() {
     var rectSize = 100 // размер прямоугольника автофокуса
 
     //Только для скрытия системной панели
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -142,7 +142,8 @@ class FragmentCameraX : Fragment() {
                         return@setOnTouchListener true
                     }
 
-                    val factory = viewFinder.getMeteringPointFactory()
+                    //val factory = viewFinder.getMeteringPointFactory()
+                    val factory = viewFinder.meteringPointFactory
                     val point = factory.createPoint(event.x, event.y)
                     val action = FocusMeteringAction.Builder(point).build()
 
@@ -216,6 +217,17 @@ class FragmentCameraX : Fragment() {
 
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar!!.hide()  // для скрытия APPBAR
+    }
+
+    override fun onStop() {
+        (activity as AppCompatActivity).supportActionBar!!.show()  // для показа APPBAR
+        super.onStop()
+    }
+
     override fun onPause() {
         super.onPause()
         isOffline = true
@@ -225,8 +237,8 @@ class FragmentCameraX : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        (activity as AppCompatActivity).supportActionBar!!.hide()  // для скрытия APPBAR
         isOffline = false
-
     }
 
     override fun onDestroyView() {
@@ -272,13 +284,14 @@ class FragmentCameraX : Fragment() {
         return if (mediaDir != null && mediaDir.exists()) mediaDir else activity?.filesDir!!
     }
 
-    private fun getStatusBarHeight(): Int {
-        val resourceId =
-            safeContext.resources.getIdentifier("status_bar_height", "dimen", "android")
-        return if (resourceId > 0) {
-            safeContext.resources.getDimensionPixelSize(resourceId)
-        } else 0
-    }
+//    // нужна ли эта устаревшая ф-я ?
+//    private fun getStatusBarHeight(): Int {
+//        val resourceId =
+//            safeContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+//        return if (resourceId > 0) {
+//            safeContext.resources.getDimensionPixelSize(resourceId)
+//        } else 0
+//    }
 
     companion object {
         const val TAG = "FragmentCameraX"
