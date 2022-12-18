@@ -13,12 +13,13 @@
     Подготовка:\n
     1. Измерить длину своего обычного шага в сантиметрах\n
     2. Запустить приложение, измеряющее углы. Например \n"Уровень" в ~Smart ToolBox~, выбрать \n"Уровень лазера"\n</string>
-    <string name="txtHelp2">"text text text text text"</string>
+    <string name="txtHelp2">"text"</string>
 
     <string name="settings_title">Настройки</string>
     <string name="settings_your_height">Ваш рост, в сантиметрах:</string>
     <string name="settings_your_height_hint">целое число</string>
     <string name="settings_is_sound">Включить звук</string>
+    <string name="settings_is_volume">Использовать для фиксации угла кнопку «Громкость вниз»</string>
     <string name="settings_tap_title">Тап по экрану:</string>
     <string name="settings_tap_autofocus">Автофокусировка на указанной области</string>
     <string name="settings_tap_fix_measure">Зафиксировать измеренный угол</string>

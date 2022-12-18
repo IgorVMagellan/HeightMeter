@@ -4,24 +4,25 @@ package com.heightmeter
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.RectF
 import android.media.MediaActionSound
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity  // для скрытия APPBAR
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.heightmeter.databinding.FragmentCameraXBinding
 import kotlinx.android.synthetic.main.fragment_camera_x.*
 import java.io.File
@@ -29,6 +30,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
+
+const val KEY_EVENT_ACTION = "key_event_action"  // для кнопки Volume Down
+const val KEY_EVENT_EXTRA = "key_event_extra"    // для кнопки Volume Down
 
 @Suppress("DEPRECATION")
 
@@ -46,6 +51,8 @@ class FragmentCameraX : Fragment() {
     private lateinit var safeContext: Context
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+
+    private lateinit var broadcastManager: LocalBroadcastManager // для кнопки Volume Down
 
     var rectSize = 100 // размер прямоугольника автофокуса
 
@@ -96,11 +103,42 @@ class FragmentCameraX : Fragment() {
         // Setup the listener for take photo button
         binding.cameraCaptureButton.setOnClickListener { takePhoto() }
 
+//        cameraCaptureButton.simulateClick(delay: Long = ANIMATION_FAST_MILLIS) {
+//            performClick()
+//            isPressed = true
+//            invalidate()
+//            postDelayed({
+//                invalidate()
+//                isPressed = false
+//            }, delay)
+
         outputDirectory = getOutputDirectory()
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 //        cameraExecutor = Executors.newCachedThreadPool()
+
+        // для кнопки Volume Down
+        broadcastManager = LocalBroadcastManager.getInstance(view.context)
+        // Set up the intent filter that will receive events from our main activity
+        val filter = IntentFilter().apply { addAction(KEY_EVENT_ACTION) }
+        broadcastManager.registerReceiver(volumeDownReceiver, filter)
     }
+
+
+    /** Volume down button receiver used to trigger shutter */
+    private val volumeDownReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.getIntExtra(KEY_EVENT_EXTRA, KeyEvent.KEYCODE_UNKNOWN)) {
+                // When the volume down button is pressed, simulate a shutter button click
+                KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                    Log.i(TAG, "Magellan: FragmentCameraX KEYCODE_VOLUME_DOWN")
+                    if (!isOffline) { takePhoto() }
+                    //binding?.cameraCaptureButton?.simulateClick()
+                }
+            }
+        }
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun startCamera() {
@@ -165,8 +203,8 @@ class FragmentCameraX : Fragment() {
 
                     overlay_rect_af.post { overlay_rect_af.drawRectBounds(focusRects) }
 // OverlayRectAF
-                    Log.e(TAG, "Focus Coordinates: " + event.x + " , " + event.y)
-                    Log.e(TAG, "preview view dimensions: " + viewFinder.width + " x " + viewFinder.height)
+                    Log.d(TAG, "Focus Coordinates: " + event.x + " , " + event.y)
+                    Log.d(TAG, "preview view dimensions: " + viewFinder.width + " x " + viewFinder.height)
 
                     return@setOnTouchListener true
                 }
@@ -249,8 +287,10 @@ class FragmentCameraX : Fragment() {
         cameraExecutor.shutdown()
 
         // Unregister the broadcast receivers and listeners
-        // broadcastManager.unregisterReceiver(volumeDownReceiver)
-        // displayManager.unregisterDisplayListener(displayListener)
+        broadcastManager?.unregisterReceiver(volumeDownReceiver)  // для кнопки Volume
+
+        Log.i(TAG, "Magellan: onDestroyView")
+//         displayManager.unregisterDisplayListener(displayListener)
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -266,11 +306,8 @@ class FragmentCameraX : Fragment() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(
-                    safeContext,
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(safeContext,"Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT).show()
 //                finish()
             }
         }

@@ -1,10 +1,14 @@
 package com.heightmeter
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val APP_PREFERENCES_ISSOUND = "isSound"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
@@ -61,23 +66,28 @@ class MainActivity : AppCompatActivity() {
         when (item.getItemId()) {
             android.R.id.home -> {
 //                Toast.makeText(this, "Back pressed", Toast.LENGTH_SHORT).show()
-                    super.onBackPressed()
+                Log.i(FragmentCameraX.TAG, "Magellan: Back pressed")
+                super.onBackPressed()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
-//    companion object {
-//
-//        @JvmStatic
-//        fun newInstanceMain() = MainActivity().apply {
-////                arguments = Bundle().apply {
-////                    putString(ARG_PARAM1, param1)
-////                    putString(ARG_PARAM2, param2)
-////                }
-//        }
-//    }
 
+    /** When key down event is triggered, relay it via local broadcast so fragments can handle it */
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        return when (keyCode) {
+            KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                val intent = Intent(KEY_EVENT_ACTION).apply { putExtra(KEY_EVENT_EXTRA, keyCode) }
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+                Log.i(FragmentCameraX.TAG, "Magellan: Main Activity KEYCODE_VOLUME_DOWN")
+
+                !FragmentCameraX.isOffline  // возвратить true, если не нужно отдавать обработчику по-умолчанию
+            }
+            else -> super.onKeyDown(keyCode, event)
+        }
+    }
 }
 
 // Toast.makeText(context, "Сохранено   " + personHeight.toString(), LENGTH_SHORT).show()

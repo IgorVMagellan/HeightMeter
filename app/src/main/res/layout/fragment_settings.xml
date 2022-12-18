@@ -26,6 +26,7 @@
         app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
         app:layout_constraintVertical_bias="0.535" />
 
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -37,10 +38,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
-
+        app:layout_constraintVertical_bias="0.045" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -61,21 +62,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="-1dp" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="175dp"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/settings_your_height"
-        android:textColor="@color/settings_text_color"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
-        app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
-        app:layout_constraintVertical_bias="1.0" />
-
     <EditText
         android:id="@+id/editTextNumberDecimal"
         android:layout_width="72dp"
@@ -90,11 +76,26 @@
         android:textColorHint="@color/settings_hint_color"
         android:textColorLink="@color/settings_text_color_colorlink"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.124" />
+        app:layout_constraintVertical_bias="0.115" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:text="@string/settings_your_height"
+        android:textColor="@color/settings_text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal"
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Switch
         android:id="@+id/switchSound"
@@ -110,11 +111,11 @@
         android:textColorHint="@color/settings_hint_color"
         android:textColorLink="@color/settings_text_color_colorlink"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236"
+        app:layout_constraintVertical_bias="0.288"
         tools:checked="false" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -129,13 +130,14 @@
         android:layout_width="369dp"
         android:layout_height="98dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="76dp"
         android:layout_marginRight="20dp"
         android:layoutDirection="rtl"
         android:layoutMode="clipBounds"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchSound">
 
@@ -170,7 +172,7 @@
         android:id="@+id/textViewTapTitle"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="@string/settings_tap_title"
         android:textColor="@color/settings_text_color"
@@ -180,35 +182,35 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/barHor"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/separator_yellow"
         android:hapticFeedbackEnabled="false"
         android:visibility="visible"
         app:guidelineUseRtl="false"
         app:layout_constraintBottom_toTopOf="@+id/textViewTapTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/barHor2"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/separator_yellow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -216,8 +218,8 @@
         android:id="@+id/imgButtCalibration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         android:contentDescription="@string/settings_calibration"
         android:src="@drawable/ic_baseline_center_focus_strong_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -227,12 +229,29 @@
         android:id="@+id/textView9"
         android:layout_width="175dp"
         android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:text="@string/settings_calibration"
         android:textColor="@color/settings_text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/barHor2" />
+
+    <Switch
+        android:id="@+id/switchVolume"
+        android:layout_width="309dp"
+        android:layout_height="57dp"
+        android:checked="false"
+        android:text="@string/settings_is_volume"
+        android:textColor="@color/settings_text_color"
+        android:textColorHighlight="@color/settings_text_color_highlight"
+        android:textColorHint="@color/settings_hint_color"
+        android:textColorLink="@color/settings_text_color_colorlink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
